@@ -11,6 +11,7 @@
     </context:component-scan>
 
     <import resource="security.xml" />
+
     <import resource="hibernateContext.xml" />
 
     <bean id="application.properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">

@@ -1,6 +1,9 @@
 package edu.uta.courses.service.impl;
 
+import edu.uta.courses.repository.QuizRepository;
+import edu.uta.courses.repository.domain.Quiz;
 import edu.uta.courses.service.QuizService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -10,6 +13,9 @@ import java.util.Random;
  */
 @Service("quizService")
 public class QuizServiceImpl implements QuizService {
+
+    @Autowired
+    QuizRepository quizRepository;
 
     @Override
     public Integer getRandomNumber() {
@@ -21,5 +27,20 @@ public class QuizServiceImpl implements QuizService {
         int randomNum = rand.nextInt(9) + 1;
 
         return randomNum;
+    }
+
+    @Override
+    public Integer getMultiplication(Integer rand1, Integer rand2) {
+        return rand1 * rand2;
+    }
+
+    @Override
+    public void storeQuiz(Quiz quiz) {
+        quizRepository.store(quiz);
+    }
+
+    @Override
+    public Quiz getQuiz(Integer id) {
+        return quizRepository.find(id);
     }
 }

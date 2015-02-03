@@ -1,19 +1,21 @@
 package edu.uta.courses.web;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import edu.uta.courses.repository.domain.Quiz;
 import edu.uta.courses.service.QuizService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * Created by me on 27.1.2015.
  */
 @Controller
 @RequestMapping("/quiz")
-@SessionAttributes(value = {"rand1", "rand2"})
+@SessionAttributes(value = {"rand1", "rand2", "gamesPlayed","gamesWon"})
 public class QuizController {
 
 
@@ -27,24 +29,60 @@ public class QuizController {
         Integer rand2 = quizService.getRandomNumber();
         model.addAttribute("rand1",rand1);
         model.addAttribute("rand2",rand2);
+        model.addAttribute("gamesPlayed", 0);
+        model.addAttribute("gamesWon", 0);
+
 
         return "/quiz/form";
     }
 
     @RequestMapping(value = "/quiz", method = RequestMethod.POST)
-    public String quiz(/*here comes all the post parameters*/) {
+    public String quiz(Model model, @RequestParam("answer") Integer answer,
+                       @ModelAttribute("rand1") Integer rand1,
+                       @ModelAttribute("rand2") Integer rand2,
+                       @ModelAttribute("gamesPlayed") Integer gamesPlayed,
+                       @ModelAttribute("gamesWon") Integer gamesWon) {
         // be sure to put new randoms to session bu placing them to model
         // get the correct answer using:
-        // quizService.getMultiplication(rand1, rand2);
-        // implement the method, it is not there yet.
 
+        // quizService.getMultiplication(rand1, rand2);
+        Integer correctAnswer = quizService.getMultiplication(rand1,rand2);
+        // implement the method, it is not there yet.
+        if (correctAnswer == answer) {
+            gamesWon++;
+            model.addAttribute("correctAnswer", Boolean.TRUE);
+        } else {
+            model.addAttribute("correctAnswer", Boolean.FALSE);
+        }
         // do other stuff before returning from controller.
+        gamesPlayed++;
+
+        Integer newrand1 = quizService.getRandomNumber();
+        Integer newrand2 = quizService.getRandomNumber();
+        model.addAttribute("rand1",newrand1);
+        model.addAttribute("rand2",newrand2);
+
+        model.addAttribute("gamesPlayed", gamesPlayed);
+        model.addAttribute("gamesWon", gamesWon);
+
         return "/quiz/quiz";
     }
 
     @RequestMapping("/complete")
-    public String complete() {
+    public String complete(Model model, SessionStatus sessionStatus,
+                           @ModelAttribute("gamesPlayed") Integer gamesPlayed,
+                           @ModelAttribute("gamesWon") Integer gamesWon) {
 
+        Quiz quiz = new Quiz();
+        quiz.setCreatedOn(new DateTime());
+        quiz.setGamesPlayed(gamesPlayed);
+        quiz.setGamesWon(gamesWon);
+        Float score = ( gamesWon.floatValue() / gamesPlayed.floatValue() ) * 100;
+        model.addAttribute("score", score);
+        quizService.storeQuiz(quiz);
+        model.addAttribute("quiz", quiz);
+
+        sessionStatus.setComplete();
         return "/quiz/theend";
     }
 
