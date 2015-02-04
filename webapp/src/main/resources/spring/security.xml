@@ -40,6 +40,9 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/resources/**"
                        access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
 
+        <intercept-url pattern="/theme/**"
+                       access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
+
         <intercept-url pattern="/home"
                        access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
 
@@ -59,7 +62,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
                        access="hasAnyRole('ROLE_USER','ROLE_SUPERUSER')" />
 
         <!--
-        any other url requires superuser priviledges
+        any other url requires superuser privileges
         this should be denied from all as any url should be mentioned above.
         -->
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_SUPERUSER')" />

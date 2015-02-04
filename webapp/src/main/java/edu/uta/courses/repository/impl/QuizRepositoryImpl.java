@@ -42,7 +42,7 @@ public class QuizRepositoryImpl implements QuizRepository {
 
     @Override
     public List<Quiz> getQuizes() {
-        // @TODO as exercise
+        // @TODO as exercise. RETURN all the QUIZes at the database.
         return null;
     }
 }

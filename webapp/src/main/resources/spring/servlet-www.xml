@@ -14,6 +14,9 @@ component-scan finds all controller annotated classes, no need to set implicitel
     <bean class="edu.uta.courses.web.HelloController"></bean>
 -->
 
+    <mvc:resources mapping="/theme/**" location="WEB-INF/theme/" />
+    <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
+
     <context:component-scan base-package="edu.uta.courses" use-default-filters="false">
         <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
     </context:component-scan>
