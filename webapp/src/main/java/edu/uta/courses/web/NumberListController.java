@@ -45,7 +45,6 @@ public class NumberListController {
         // put a copy of that list to model
 
         model.addAttribute("arrayListOfNumbers", arrayListOfNumbers);
-
         return "/numberlist/ask";
     }
 

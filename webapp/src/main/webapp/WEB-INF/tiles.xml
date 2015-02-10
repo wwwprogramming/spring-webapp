@@ -43,6 +43,10 @@ https://tiles.apache.org/framework/tutorial/advanced/nesting-extending.html
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/quiz/{1}.jsp" />
     </definition>
 
+    <definition name="/user/*"  extends="base.template1">
+        <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/user/{1}.jsp" />
+    </definition>
+
 
     <definition name="*" extends="base.template1">
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/{1}-tiles.jsp" />

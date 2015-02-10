@@ -33,5 +33,15 @@ Menu
             <spring:url value="/numberlist/start" var="nlUrl" htmlEscape="true"/>
             <a href="${nlUrl}">Numberlist</a>
         </li>
+
+        <li>
+            <spring:url value="/quiz" var="quizUrl" htmlEscape="true"/>
+            <a href="${quizUrl}">Quiz</a>
+         </li>
+
+         <li>
+             <spring:url value="/user/create" var="userUrl" htmlEscape="true"/>
+             <a href="${userUrl}">Create User</a>
+         </li>
     </ul>
 </div>

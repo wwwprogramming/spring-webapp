@@ -58,6 +58,14 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/quiz/**"
                        access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
 
+        <!--  This should be anyone or superadmin if he can do users -->
+        <intercept-url pattern="/user/create"
+                       access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
+
+        <!-- who should this be? -->
+        <intercept-url pattern="/user/show"
+                       access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
+
         <intercept-url pattern="/account"
                        access="hasAnyRole('ROLE_USER','ROLE_SUPERUSER')" />
 
@@ -88,10 +96,9 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <authentication-manager alias="authenticationManager">
 
         <authentication-provider ref="staticAuthenticationProvider"/>
-        <!--
-        Users from the database, NOT IMPLEMENTED
+
         <authentication-provider ref="daoAuthenticationProvider"/>
-        -->
+
     </authentication-manager>
 
 
@@ -101,20 +108,10 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <beans:property name="defaultFailureUrl" value="/login"/>
     </beans:bean>
 
-    <!-- main provider for authentication. superusers are from other source -->
-    <!-- IMPLEMENT IF NEED TO USE
-    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-        <beans:property name="userDetailsService" ref="wwwUserDetailsService"/>
-
-        <beans:property name="saltSource">
-            <beans:bean class="org.springframework.security.authentication.dao.ReflectionSaltSource">
-                <beans:property name="userPropertyToUse" value="username"/>
-            </beans:bean>
-        </beans:property>
-        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
-
-    </beans:bean>
-    -->
+    <!--
+        add to form-login authentication-success-handler-ref="authenticationSuccessHandler" if need to use.
+        <beans:bean id="authenticationSuccessHandler" class="org.proactum.skal.webapp.security.AuthenticationSuccessHandlerImpl" />
+        -->
 
     <user-service id="staticUserDetailsService">
         <user name="jimi" password="jimipw" authorities="ROLE_MODERATOR" />
@@ -127,6 +124,17 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <beans:property name="userDetailsService" ref="staticUserDetailsService"/>
     </beans:bean>
 
+    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="wwwUserDetailsService"/>
+
+        <beans:property name="saltSource">
+            <beans:bean class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+                <beans:property name="userPropertyToUse" value="username"/>
+            </beans:bean>
+        </beans:property>
+        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
+
+    </beans:bean>
 
     <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
         <beans:constructor-arg index="0" value="256"/>
