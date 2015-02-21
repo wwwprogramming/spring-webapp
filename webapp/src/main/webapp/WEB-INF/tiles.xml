@@ -21,6 +21,12 @@ https://tiles.apache.org/framework/tutorial/advanced/nesting-extending.html
         <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"  />
     </definition>
 
+    <definition name="base.template.quiz" template="/WEB-INF/template/quiz/template.jsp" >
+        <put-attribute name="header" value="/WEB-INF/template/quiz/header.jsp"  />
+        <put-attribute name="menu" value="/WEB-INF/template/quiz/menu.jsp"  />
+        <put-attribute name="footer" value="/WEB-INF/template/quiz/footer.jsp"  />
+    </definition>
+
 
     <definition name="/login" extends="base.template1">
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/login/login.jsp" />
@@ -39,12 +45,16 @@ https://tiles.apache.org/framework/tutorial/advanced/nesting-extending.html
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/numberlist/{1}.jsp" />
     </definition>
 
-    <definition name="/quiz/*"  extends="base.template1">
+    <definition name="/quiz/*"  extends="base.template.quiz">
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/quiz/{1}.jsp" />
     </definition>
 
     <definition name="/user/*"  extends="base.template1">
         <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/user/{1}.jsp" />
+    </definition>
+
+    <definition name="/account/*"  extends="base.template1">
+        <put-attribute name="bodyTemplate" value="/WEB-INF/jsp/account/{1}.jsp" />
     </definition>
 
 

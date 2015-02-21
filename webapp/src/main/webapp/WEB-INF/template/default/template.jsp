@@ -5,8 +5,8 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Default tiles template</title>
-    <link href="<c:url value='resources/css/css.css' />" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="<c:url value='resources/js/js.js' />"></script>
+    <link href="<c:url value='/resources/css/css.css' />" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="<c:url value='/resources/js/js.js' />"></script>
 </head>
 <body>
     <div class="page">

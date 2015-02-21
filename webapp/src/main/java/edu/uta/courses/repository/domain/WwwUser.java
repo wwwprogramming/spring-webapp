@@ -75,6 +75,7 @@ public class WwwUser  implements UserDetails {
         this.isAccountNonExpired = u.getAccountNonExpired() != null ? u.getAccountNonExpired(): true;
         this.isAccountNonLocked = u.getAccountNonLocked() != null ? u.getAccountNonLocked(): true;
         this.isCredentialsNonExpired = u.getCredentialsNonExpired() != null ? u.getCredentialsNonExpired(): true;
+
     }
 
     public Long getId() {

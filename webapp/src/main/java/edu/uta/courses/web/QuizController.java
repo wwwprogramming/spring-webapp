@@ -1,8 +1,11 @@
 package edu.uta.courses.web;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import edu.uta.courses.repository.PersonRepository;
 import edu.uta.courses.repository.domain.Quiz;
+import edu.uta.courses.repository.domain.WwwUser;
 import edu.uta.courses.service.QuizService;
+import edu.uta.courses.util.UserUtil;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class QuizController {
 
     @Autowired
     QuizService quizService;
+
+    @Autowired
+    PersonRepository personRepository;
 
     @RequestMapping(value = {"/start", ""})
     public String start(Model model) {
@@ -77,6 +83,15 @@ public class QuizController {
         quiz.setCreatedOn(new DateTime());
         quiz.setGamesPlayed(gamesPlayed);
         quiz.setGamesWon(gamesWon);
+        // of is not anonymous user, set the user too.
+        WwwUser u = UserUtil.getWwwUser();
+        try {
+            if (u != null) {
+                quiz.setUser(personRepository.findById(u.getId()));
+            }
+        } catch (Exception e) {
+            /* noop */
+        }
         Float score = ( gamesWon.floatValue() / gamesPlayed.floatValue() ) * 100;
         model.addAttribute("score", score);
         quizService.storeQuiz(quiz);
@@ -84,6 +99,12 @@ public class QuizController {
 
         sessionStatus.setComplete();
         return "/quiz/theend";
+    }
+
+    @RequestMapping("/quizes")
+    public String quizes(Model model) {
+        model.addAttribute("quizList", quizService.getQuizes());
+        return "/quiz/quizes";
     }
 
 }

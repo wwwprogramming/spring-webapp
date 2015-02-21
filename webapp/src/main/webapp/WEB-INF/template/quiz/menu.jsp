@@ -43,9 +43,5 @@ Menu
              <spring:url value="/user/create" var="userUrl" htmlEscape="true"/>
              <a href="${userUrl}">Create User</a>
          </li>
-         <li>
-                      <spring:url value="/account/list" var="accListUrl" htmlEscape="true"/>
-                      <a href="${accListUrl}">Accounts</a>
-                  </li>
     </ul>
 </div>

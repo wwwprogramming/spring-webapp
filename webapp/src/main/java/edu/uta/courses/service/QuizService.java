@@ -4,6 +4,8 @@ package edu.uta.courses.service;
 import edu.uta.courses.repository.domain.Quiz;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by me on 27.1.2015.
  */
@@ -20,5 +22,8 @@ public interface QuizService {
 
     @Transactional
     public Quiz getQuiz(Integer id);
+
+    @Transactional
+    public List<Quiz> getQuizes();
 
 }

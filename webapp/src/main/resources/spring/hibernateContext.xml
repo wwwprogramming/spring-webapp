@@ -6,6 +6,11 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
+    <!--
+
+    http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm
+
+    -->
     <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="edu.uta.courses" />

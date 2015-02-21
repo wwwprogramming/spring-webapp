@@ -32,17 +32,16 @@ public class QuizRepositoryImpl implements QuizRepository {
 
     @Override
     public void update(Quiz quiz) {
-        // @TODO as exercise
+        em.merge(quiz);
     }
 
     @Override
     public void remove(Quiz quiz) {
-        // @TODO as Exercise
+        em.remove(quiz);
     }
 
     @Override
     public List<Quiz> getQuizes() {
-        // @TODO as exercise. RETURN all the QUIZes at the database.
-        return null;
+        return em.createQuery("SELECT z FROM Quiz z", Quiz.class).getResultList();
     }
 }

@@ -40,25 +40,7 @@ public class HelloController {
         return "about";
     }
 
-    @RequestMapping("/account")
-    public String account(Model model) {
-        model.addAttribute("account", "");
-        // can not do this anymore! User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // OR check if the user is instance if WwwUser...?
-        try {
-            WwwUser wUser = UserUtil.getWwwUser();
-        } catch (Exception e) {
-          /* no op BUT REMEMBER, there is static user service too, those ARE instances of
-           org.springframework.security.core.userdetails.User
-           */
-            logger.error("Trying to get WwwUser but the user is not such user?");
-        }
-        String name = user.getUsername(); //get logged in username
 
-        model.addAttribute("username", name);
-        return "account";
-    }
 
 
 

@@ -36,6 +36,9 @@ public class Quiz {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime archivedOn;
 
+    @ManyToOne(optional = true)
+    User user;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +85,13 @@ public class Quiz {
 
     public void setArchivedOn(DateTime archivedOn) {
         this.archivedOn = archivedOn;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
