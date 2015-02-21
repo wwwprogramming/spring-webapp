@@ -7,6 +7,8 @@ import edu.uta.courses.repository.domain.WwwUser;
 import edu.uta.courses.util.UserUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,16 @@ public class AccountController {
     public String account(Model model) {
         model.addAttribute("account", "");
         // can not do this anymore! User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails user = (UserDetails) auth.getPrincipal();
+            name = user.getUsername();
+        } else {
+            // User is actually anonymous, so is not logged in.
+            name = (String)auth.getPrincipal();
+        }
+
         // OR check if the user is instance if WwwUser...?
         try {
             WwwUser wUser = UserUtil.getWwwUser();
@@ -43,7 +54,7 @@ public class AccountController {
            */
             logger.error("Trying to get WwwUser but the user is not such user?");
         }
-        String name = user.getUsername(); //get logged in username
+         //get logged in username
 
         model.addAttribute("username", name);
         return "account";
