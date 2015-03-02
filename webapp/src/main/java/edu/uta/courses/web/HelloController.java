@@ -33,6 +33,11 @@ public class HelloController {
         return "home";
     }
 
+    @RequestMapping("/slider")
+    public String slider(Model model) {
+        return "/slider";
+    }
+
     @RequestMapping("/about")
     public String about(Model model) {
         model.addAttribute("about", "This is ...");

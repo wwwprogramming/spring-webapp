@@ -24,6 +24,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <http pattern="/favicon.ico" security="none" />
     <http pattern="/template/**" security="none" />
     <http pattern="/error/**" security="none" />
+    <http pattern="/images/**" security="none" />
 
     <http use-expressions="true" >
         <access-denied-handler error-page="/WEB-INF/jsp/error/accessdenied.jsp" />
@@ -48,6 +49,11 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
         <intercept-url pattern="/about"
                        access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
+
+        <intercept-url pattern="/slider"
+                       access="hasAnyRole('ROLE_USER','ROLE_SUPERUSER','ROLE_GUEST','ROLE_ANONYMOUS')" />
+
+
 
         <intercept-url pattern="/formexample/**"
                        access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
