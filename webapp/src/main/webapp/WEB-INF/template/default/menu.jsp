@@ -44,8 +44,17 @@ Menu
              <a href="${userUrl}">Create User</a>
          </li>
          <li>
-                      <spring:url value="/account/list" var="accListUrl" htmlEscape="true"/>
-                      <a href="${accListUrl}">Accounts</a>
-                  </li>
+              <spring:url value="/account/list" var="accListUrl" htmlEscape="true"/>
+          <a href="${accListUrl}">Accounts</a>
+      </li>
+
+
+        <li>
+            <spring:url value="/autocomplete/view" var="acUrl" htmlEscape="true"/>
+            <a href="${acUrl}">Autocomplete</a>
+        </li>
+
+
+
     </ul>
 </div>

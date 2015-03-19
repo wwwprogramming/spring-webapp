@@ -25,6 +25,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <http pattern="/template/**" security="none" />
     <http pattern="/error/**" security="none" />
     <http pattern="/images/**" security="none" />
+    <http pattern="/autocomplete/**" security="none" />
 
     <http use-expressions="true" >
         <access-denied-handler error-page="/WEB-INF/jsp/error/accessdenied.jsp" />
