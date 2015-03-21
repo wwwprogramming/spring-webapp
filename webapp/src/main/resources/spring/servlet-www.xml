@@ -21,6 +21,12 @@ component-scan finds all controller annotated classes, no need to set implicitel
         <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
     </context:component-scan>
 
+    <!--
+    need to have for the value annotations at the controller
+    better to move those to services, but fileupload example has uploadPath, so...
+    -->
+    <context:property-placeholder ignore-unresolvable="true" ignore-resource-not-found="true" location="classpath:application.properties" />
+
     <mvc:annotation-driven />
 
     <mvc:interceptors>
@@ -30,53 +36,11 @@ component-scan finds all controller annotated classes, no need to set implicitel
         </bean>
     </mvc:interceptors>
 
-
-
-    <!--
-    - The ContentNegotiatingViewResolver delegates to the InternalResourceViewResolver and BeanNameViewResolver,
-    - and uses the requested media type (determined by the path extension) to pick a matching view.
-    - When the media type is 'text/html', it will delegate to the InternalResourceViewResolver's JstlView,
-    - otherwise to the BeanNameViewResolver.
-    -->
-
-    <!--
-    without tiles
-    <mvc:view-resolvers>
-        <mvc:content-negotiation use-not-acceptable="true">
-            <mvc:default-views>
-                <bean class="org.springframework.web.servlet.view.JstlView">
-                    <property name="url" value="" />
-                </bean>
-            </mvc:default-views>
-        </mvc:content-negotiation>
-
-
-        <mvc:bean-name />
-        <mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"/>
-    </mvc:view-resolvers>
--->
-
-    <!-- with tiles -->
-
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5000000"/>
+    </bean>
 
     <import resource="classpath:spring/tiles-view.xml" />
-
-
- <!--
-<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
-</bean>
--->
-<!--
-    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <property name="definitions">
-            <list>
-                <value>/WEB-INF/tiles.xml</value>
-            </list>
-        </property>
-    </bean>
--->
-    <!-- //with tiles -->
-
 
 </beans>
