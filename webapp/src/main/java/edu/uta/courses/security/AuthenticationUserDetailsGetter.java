@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 
-@Component("wwwUserDetailsService")
+@Component(value = "wwwUserDetailsService")
 public class AuthenticationUserDetailsGetter implements UserDetailsService {
 
     Logger logger = Logger.getLogger(AuthenticationUserDetailsGetter.class.getName());

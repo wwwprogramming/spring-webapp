@@ -10,13 +10,13 @@
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 
-    <import resource="security.xml" />
+
 
     <import resource="hibernateContext.xml" />
 
     <import resource="i18n.xml" />
 
-
+    <import resource="security.xml" />
 
     <bean id="application.properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
