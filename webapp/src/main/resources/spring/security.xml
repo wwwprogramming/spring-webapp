@@ -28,6 +28,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <http pattern="/autocomplete/**" security="none" />
 
     <http use-expressions="true" >
+        <csrf disabled="true" />
         <access-denied-handler error-page="/WEB-INF/jsp/error/accessdenied.jsp" />
 
 
@@ -35,8 +36,6 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
         <intercept-url pattern="/login" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
         <intercept-url pattern="/logout" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
-        <intercept-url pattern="/j_spring_security_check"  access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
-        <intercept-url pattern="/j_spring_security_logout"  access="hasAnyRole('ROLE_ANONYMOUS','ROLE_GUEST')" />
 
         <!-- Resources -->
         <intercept-url pattern="/resources/**"
@@ -90,13 +89,13 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_SUPERUSER')" />
 
         <!-- form login -->
-        <form-login login-page="/login" login-processing-url="/j_spring_security_check"
+        <form-login login-page="/login" login-processing-url="/login"
                     default-target-url="/" 
                     authentication-failure-url="/login"  />
         <logout logout-success-url="/logout" invalidate-session="true"/>
         <!-- logout -->
         <logout 
-            logout-url="/j_spring_security_logout"
+            logout-url="/logout"
             invalidate-session="true"
         />
 

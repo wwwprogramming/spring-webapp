@@ -20,13 +20,13 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     Logger log = Logger.getLogger(PersonRepositoryImpl.class.getName());
 
-
     @PersistenceContext(name = "entityManager")
     EntityManager em;
 
     @Override
     public void create(User user) {
         user.setCreatedOn(new DateTime());
+
         em.persist(user);
         if (log.isDebugEnabled()) log.debug("Persisted user");
     }

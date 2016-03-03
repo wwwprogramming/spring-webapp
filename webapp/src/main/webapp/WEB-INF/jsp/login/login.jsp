@@ -13,26 +13,26 @@ ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
 <h1>Kirjaudu</h1>
 
 
-<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check" id="loginForm">
+<form method="post" action="${pageContext.request.contextPath}/login" id="loginForm">
     <div id="passwordLoginOption" class="form">
         <div class="row">
             <div class="label left">
-                <label for="j_username">Tunnus:</label>
+                <label for="username">Tunnus:</label>
             </div>
             <div class="right">
                 <div class="textWrapper">
-                    <input type="text" id="j_username" name="j_username"/>
+                    <input type="text" id="username" name="username"/>
                 </div>
             </div>
             <div class="cl"></div>
         </div>
         <div class="row">
             <div class="label left">
-                <label for="j_password">Salasana:</label>
+                <label for="password">Salasana:</label>
             </div>
             <div class="right">
                 <div class="textWrapper">
-                    <input type="password" id="j_password" name="j_password"/>
+                    <input type="password" id="password" name="password"/>
                 </div>
             </div>
             <div class="cl"></div>

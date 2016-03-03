@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,8 @@ public class AutoCompleteController {
     }
 
     @RequestMapping(value = "/countries")
-    public @ResponseBody HashMap<String, String> getCountries(@RequestParam(value = "term", required = false) String term) {
+    public @ResponseBody HashMap<String, String> getCountries(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "term", required = false) String term) {
+        //request.
         HashMap<String, String> map = countries();
         // filter those map items starting with term
         HashMap<String,String> result = new HashMap<String,String>();

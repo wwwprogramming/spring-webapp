@@ -2,9 +2,12 @@ package edu.uta.courses.repository.domain;
 
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by me on 3.2.2015.
@@ -17,6 +20,8 @@ public class Quiz {
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    @Length
     @Column(nullable=false)
     private Integer gamesPlayed;
 

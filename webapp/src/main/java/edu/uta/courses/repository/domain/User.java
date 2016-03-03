@@ -13,6 +13,11 @@ import java.io.Serializable;
 @Table(name = "user")
 public class User implements Serializable {
 
+    @PrePersist
+    public void a() {
+
+    }
+
     @Id
     @GeneratedValue
     @Column
