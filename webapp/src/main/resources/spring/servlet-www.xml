@@ -27,7 +27,7 @@ component-scan finds all controller annotated classes, no need to set implicitel
     -->
     <context:property-placeholder ignore-unresolvable="true" ignore-resource-not-found="true" location="classpath:application.properties" />
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven conversion-service="conversionService" />
 
     <mvc:interceptors>
         <bean id="localeChangeInterceptor"
@@ -39,6 +39,19 @@ component-scan finds all controller annotated classes, no need to set implicitel
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="5000000"/>
+    </bean>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <!-- Wiring the bean -->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="edu.uta.courses.converter.CheapCarConverter"></bean>
+            </set>
+        </property>
     </bean>
 
     <import resource="classpath:spring/tiles-view.xml" />

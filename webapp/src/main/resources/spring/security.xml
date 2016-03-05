@@ -26,6 +26,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <http pattern="/error/**" security="none" />
     <http pattern="/images/**" security="none" />
     <http pattern="/autocomplete/**" security="none" />
+    <http pattern="/binddemo/**" security="none" />
 
     <http use-expressions="true" >
         <csrf disabled="true" />
